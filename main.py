@@ -4,14 +4,15 @@
 __author__ = 'Bartosz Kościów'
 
 import RPi.GPIO as GPIO #pylint: disable=I0011,F0401
-from charlcd import buffered
-from charlcd.drivers.gpio import Gpio
-from charlcd.drivers.i2c import I2C
-from charlcd import virtual_buffered
-from lcdmanager import manager
+from charlcd import buffered #pylint: disable=I0011,F0401
+from charlcd.drivers.gpio import Gpio #pylint: disable=I0011,F0401
+from charlcd.drivers.i2c import I2C #pylint: disable=I0011,F0401
+from charlcd import virtual_buffered #pylint: disable=I0011,F0401
+from lcdmanager import manager #pylint: disable=I0011,F0401
 import game
 
 GPIO.setmode(GPIO.BCM)
+
 
 def main():
     """set lcds and start game"""
