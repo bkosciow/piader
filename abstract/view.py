@@ -14,7 +14,9 @@ class View(object):
         raise NotImplementedError("hide not implemented")
 
     def show(self):
-        """on show event - used when switching to this view. Should reinitialize view"""
+        """on show event - used when switching to this view.
+        Should reinitialize view
+        """
         raise NotImplementedError("show not implemented")
 
     def loop(self, action):
