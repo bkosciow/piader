@@ -41,7 +41,7 @@ class Piader(object):
         self.queue = Queue.Queue()
         self.event_server = event_server.EventServerThread(self.queue)
         self.local_keyboard = local_key.Keyboard()
-        self.views['home'] = home_view.Home(self.game_manager)
+        self.views['home'] = home_view.Home(self.game_manager, self)
         self.init_game()
 
     def init_game(self):
@@ -109,3 +109,7 @@ class Piader(object):
             event = None
 
         return event
+
+    def quit_game(self):
+        """quit game"""
+        self.option['game_on'] = False
