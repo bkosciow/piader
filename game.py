@@ -29,11 +29,13 @@ class Piader(object):
         """init class"""
         self.game_manager = game_manager
         self.score_manager = score_manager
-        self.width = self.game_manager.width
-        self.height = self.game_manager.height
-        if self.width < 6:
+        self.size = {
+            'width': self.game_manager.width,
+            'height': self.game_manager.height
+        }
+        if self.size['width'] < 6:
             raise ValueError("Width must be larger than 5")
-        if self.height < 3:
+        if self.size['height'] < 3:
             raise ValueError("Height must be larger than 2")
         self.queue = Queue.Queue()
         self.event_server = event_server.EventServerThread(self.queue)
@@ -44,13 +46,15 @@ class Piader(object):
     def init_game(self):
         """start game"""
         self.player = player.Player(
-            (self.width / 2) - 2,
-            self.height - 1,
-            self.width,
+            (self.size['width'] / 2) - 2,
+            self.size['height'] - 1,
+            self.size['width'],
             self.option['objects']
         )
         self.option['objects'] = []
-        self.option['objects'].append(enemy.Enemy(2, 0, self.width, self.option['objects']))
+        self.option['objects'].append(
+            enemy.Enemy(2, 0, self.size['width'], self.option['objects'])
+        )
         self.option['objects'].append(self.player)
 
     def home_tab(self, action):
