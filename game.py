@@ -11,6 +11,7 @@ import local_key
 import player
 import enemy
 import time
+import views.home as home_view
 
 
 class Piader(object):
@@ -22,7 +23,7 @@ class Piader(object):
         'objects': [],
         'gui_current_tab': 'home'
     }
-
+    views = {}
     player = None
 
     def __init__(self, game_manager, score_manager=None):
@@ -35,12 +36,12 @@ class Piader(object):
         }
         if self.size['width'] < 6:
             raise ValueError("Width must be larger than 5")
-        if self.size['height'] < 3:
-            raise ValueError("Height must be larger than 2")
+        if self.size['height'] < 4:
+            raise ValueError("Height must be larger than 3")
         self.queue = Queue.Queue()
         self.event_server = event_server.EventServerThread(self.queue)
         self.local_keyboard = local_key.Keyboard()
-
+        self.views['home'] = home_view.Home(self.game_manager)
         self.init_game()
 
     def init_game(self):
@@ -59,7 +60,7 @@ class Piader(object):
 
     def home_tab(self, action):
         """home tab"""
-        pass
+        self.views['home'].loop(action)
 
     def options_tab(self, action):
         """options tab"""
@@ -69,9 +70,15 @@ class Piader(object):
         """game tab"""
         pass
 
+    def tick(self):
+        """render view"""
+        self.game_manager.render()
+        self.game_manager.flush()
+
     def main_loop(self):
         """main loop"""
         self.event_server.start()
+        self.views['home'].show()
         try:
             while self.option['game_on']:
                 start = time.time()
@@ -83,6 +90,8 @@ class Piader(object):
                     self.options_tab(action)
                 elif self.option['gui_current_tab'] == 'game':
                     self.game_tab(action)
+
+                self.tick()
 
                 end = time.time()
                 if end - start < self.option['game_tick']:

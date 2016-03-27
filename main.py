@@ -20,6 +20,7 @@ def main():
     """set lcds and start game"""
     # lcd_two = buffered.CharLCD(16, 2, I2C(0x20, 1), 0, 0)
     lcd_one = buffered.CharLCD(20, 4, Gpio(), 0, 0)
+    lcd_one.init()
 
     drv = I2C(0x3a, 1)
     drv.pins['E2'] = 6
@@ -35,8 +36,12 @@ def main():
     vlcd_support.add_display(0, 0, lcd_one)
     vlcd_support.init()
 
-    game_manager = manager.Manager(lcd_three)
-    score_manager = manager.Manager(vlcd_support)
+    # game_manager = manager.Manager(lcd_three)
+    # score_manager = manager.Manager(vlcd_support)
+
+    game_manager = manager.Manager(lcd_one)
+    score_manager = manager.Manager(lcd_three)
+
     my_game = game.Piader(game_manager, score_manager)
     my_game.main_loop()
 
