@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+""" Piader v2
+"""
 __author__ = 'Bartosz Kościów'
 
 import Queue
@@ -18,23 +20,26 @@ class Piader(object):
     score = 0
     game_on = True
     gui_current_tab = 'home'
+    player = None
 
-    def __init__(self, game_manager, score_manager = None):
+    def __init__(self, game_manager, score_manager=None):
         """init class"""
-        if self.width < 6:
-            raise ValueError("Width must be larger than 5")
-        if self.height < 3:
-            raise ValueError("Height must be larger than 2")
         self.game_manager = game_manager
         self.score_manager = score_manager
         self.width = self.game_manager.width
         self.height = self.game_manager.height
+        if self.width < 6:
+            raise ValueError("Width must be larger than 5")
+        if self.height < 3:
+            raise ValueError("Height must be larger than 2")
         self.queue = Queue.Queue()
         self.event_server = event_server.EventServerThread(self.queue)
         self.local_keyboard = local_key.Keyboard()
+
         self.init_game()
 
     def init_game(self):
+        """start game"""
         self.player = player.Player(
             (self.width / 2) - 2,
             self.height - 1,
@@ -46,12 +51,15 @@ class Piader(object):
         self.objects.append(self.player)
 
     def home_tab(self, action):
+        """home tab"""
         pass
 
     def options_tab(self, action):
+        """options tab"""
         pass
 
     def game_tab(self, action):
+        """game tab"""
         pass
 
     def main_loop(self):
