@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+"""Piader v2"""
+
 __author__ = 'Bartosz Kościów'
 
 import RPi.GPIO as GPIO #pylint: disable=I0011,F0401

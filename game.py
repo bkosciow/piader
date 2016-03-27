@@ -15,11 +15,14 @@ import time
 
 class Piader(object):
     """Piader main class"""
-    game_tick = 0.5 #1.0
-    objects = []
-    score = 0
-    game_on = True
-    gui_current_tab = 'home'
+    option = {
+        'game_tick': 0.5,
+        'game_on': True,
+        'score': 0,
+        'objects': [],
+        'gui_current_tab': 'home'
+    }
+
     player = None
 
     def __init__(self, game_manager, score_manager=None):
@@ -44,11 +47,11 @@ class Piader(object):
             (self.width / 2) - 2,
             self.height - 1,
             self.width,
-            self.objects
+            self.option['objects']
         )
-        self.objects = []
-        self.objects.append(enemy.Enemy(2, 0, self.width, self.objects))
-        self.objects.append(self.player)
+        self.option['objects'] = []
+        self.option['objects'].append(enemy.Enemy(2, 0, self.width, self.option['objects']))
+        self.option['objects'].append(self.player)
 
     def home_tab(self, action):
         """home tab"""
@@ -66,21 +69,21 @@ class Piader(object):
         """main loop"""
         self.event_server.start()
         try:
-            while self.game_on:
+            while self.option['game_on']:
                 start = time.time()
                 self.local_keyboard.read()
                 action = self._get_action()
-                if self.gui_current_tab == 'home':
+                if self.option['gui_current_tab'] == 'home':
                     self.home_tab(action)
-                elif self.gui_current_tab == 'options':
+                elif self.option['gui_current_tab'] == 'options':
                     self.options_tab(action)
-                elif self.gui_current_tab == 'game':
+                elif self.option['gui_current_tab'] == 'game':
                     self.game_tab(action)
 
                 end = time.time()
-                if end - start < self.game_tick:
+                if end - start < self.option['game_tick']:
                     t_delta = end - start
-                    time.sleep(max(0, self.game_tick - t_delta))
+                    time.sleep(max(0, self.option['game_tick'] - t_delta))
         finally:
             self.local_keyboard.shutdown()
             self.event_server.join()
