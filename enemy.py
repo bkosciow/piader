@@ -6,9 +6,9 @@
 
 __author__ = 'Bartosz Kościów'
 import random
-import piader_1_1.item as item
-import piader_1_1.bomb as bomb
-import piader_1_1.missile as missile
+import item
+import bomb
+import missile
 
 
 class Enemy(item.Item):

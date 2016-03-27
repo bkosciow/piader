@@ -5,9 +5,9 @@
 """Player class"""
 
 __author__ = 'Bartosz Kościów'
-import piader_1_1.item as item
-import piader_1_1.missile as missile
-import piader_1_1.bomb as bomb
+import item
+import missile
+import bomb
 
 
 class Player(item.Item):
