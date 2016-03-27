@@ -5,9 +5,9 @@
 __author__ = 'Bartosz Kościów'
 
 import abstract.view as view
-import lcdmanager.widget.pane as pane
-import lcdmanager.widget.button as button
-import lcdmanager.widget.label as label
+import lcdmanager.widget.pane as pane #pylint: disable=I0011,F0401
+import lcdmanager.widget.button as button #pylint: disable=I0011,F0401
+import lcdmanager.widget.label as label #pylint: disable=I0011,F0401
 
 
 class Home(view.View):
@@ -29,7 +29,9 @@ class Home(view.View):
         button_start.callback = self._button_start
         self.pane.add_widget(button_start)
 
-        button_options = button.Button(self.pane.width / 2 - 5, 2, 'btn_options')
+        button_options = button.Button(
+            self.pane.width / 2 - 5, 2, 'btn_options'
+        )
         button_options.label = " Options "
         button_options.callback = self._button_options
         self.pane.add_widget(button_options)
