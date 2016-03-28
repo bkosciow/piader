@@ -59,10 +59,12 @@ class Options(view.View):
 
     def hide(self):
         """hide home tab"""
+        self.buttons[self.active_button].event_blur()
         self.pane.visibility = False
 
     def show(self):
         """show home tab"""
+        self.active_button = 0
         self.pane.visibility = True
         self.pane.get_widget('btn_lives').event_focus()
 
@@ -99,8 +101,16 @@ class Options(view.View):
 
     def _button_difficulty(self, widget):
         """set difficulty level"""
-        print "difficulty"
+        idx = self.game.cfg.difficulty_dict.index(self.game.cfg.difficulty) + 1
+        if idx > len(self.game.cfg.difficulty_dict) - 1:
+            idx = 0
+        self.game.cfg.difficulty = self.game.cfg.difficulty_dict[idx]
+        self.label_difficulty.label = str(self.game.cfg.difficulty)
 
     def _button_lives(self, widget):
         """set lives number"""
-        print "lives"
+        idx = self.game.cfg.lives_dict.index(self.game.cfg.lives) + 1
+        if idx > len(self.game.cfg.lives_dict) - 1:
+            idx = 0
+        self.game.cfg.lives = self.game.cfg.lives_dict[idx]
+        self.label_lives.label = str(self.game.cfg.lives)
