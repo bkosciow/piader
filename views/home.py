@@ -48,11 +48,13 @@ class Home(view.View):
 
     def hide(self):
         """hide home tab"""
+        self.buttons[self.active_button].event_blur()
         self.pane.visibility = False
 
     def show(self):
         """show home tab"""
         self.pane.visibility = True
+        self.active_button = 0
         self.pane.get_widget('btn_start').event_focus()
 
     def loop(self, action):
@@ -88,7 +90,7 @@ class Home(view.View):
 
     def _button_options(self, widget):
         """options"""
-        print "options"
+        self.game.set_tab('options')
 
     def _button_start(self, widget):
         """start game"""

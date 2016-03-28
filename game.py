@@ -12,6 +12,8 @@ import player
 import enemy
 import time
 import views.home as home_view
+import views.options as options_view
+import configuration as cfg
 
 
 class Piader(object):
@@ -38,10 +40,12 @@ class Piader(object):
             raise ValueError("Width must be larger than 5")
         if self.size['height'] < 4:
             raise ValueError("Height must be larger than 3")
+        self.cfg = cfg.Configuration()
         self.queue = Queue.Queue()
         self.event_server = event_server.EventServerThread(self.queue)
         self.local_keyboard = local_key.Keyboard()
         self.views['home'] = home_view.Home(self.game_manager, self)
+        self.views['options'] = options_view.Options(self.game_manager, self)
         self.init_game()
 
     def init_game(self):
@@ -64,7 +68,7 @@ class Piader(object):
 
     def options_tab(self, action):
         """options tab"""
-        pass
+        self.views['options'].loop(action)
 
     def game_tab(self, action):
         """game tab"""
@@ -78,7 +82,7 @@ class Piader(object):
     def main_loop(self):
         """main loop"""
         self.event_server.start()
-        self.views['home'].show()
+        self.set_tab('home')
         try:
             while self.option['game_on']:
                 start = time.time()
@@ -113,3 +117,10 @@ class Piader(object):
     def quit_game(self):
         """quit game"""
         self.option['game_on'] = False
+
+    def set_tab(self, tab):
+        """change views"""
+        self.views['home'].hide()
+        self.views['options'].hide()
+        self.views[tab].show()
+        self.option['gui_current_tab'] = tab
