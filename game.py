@@ -13,6 +13,7 @@ import enemy
 import time
 import views.home as home_view
 import views.options as options_view
+import views.game as game_view
 import configuration as cfg
 
 
@@ -46,6 +47,7 @@ class Piader(object):
         self.local_keyboard = local_key.Keyboard()
         self.views['home'] = home_view.Home(self.game_manager, self)
         self.views['options'] = options_view.Options(self.game_manager, self)
+        self.views['game'] = game_view.Game(self.game_manager, self)
         self.init_game()
 
     def init_game(self):
@@ -72,7 +74,7 @@ class Piader(object):
 
     def game_tab(self, action):
         """game tab"""
-        pass
+        self.views['game'].loop(action)
 
     def tick(self):
         """render view"""
@@ -122,5 +124,6 @@ class Piader(object):
         """change views"""
         self.views['home'].hide()
         self.views['options'].hide()
+        self.views['game'].hide()
         self.views[tab].show()
         self.option['gui_current_tab'] = tab

@@ -94,4 +94,4 @@ class Home(view.View):
 
     def _button_start(self, widget):
         """start game"""
-        print "start game"
+        self.game.set_tab('game')
