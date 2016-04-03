@@ -44,4 +44,18 @@ class Game(view.View):
 
     def loop(self, action):
         """game tick"""
-        pass
+        self.canvas.clear()
+        for item in self._options['objects']:
+            item.tick()
+            self.draw(item)
+
+    def draw(self, item):
+        """draw sprite on screen"""
+        (position_x, position_y) = item.get_position()
+
+        if position_y >= self.canvas.height or position_y < 0:
+            self._options['objects'].remove(item)
+            item.event_discard()
+            return
+
+        self.canvas.write(item.get_sprite(), position_x, position_y)
