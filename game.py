@@ -8,8 +8,6 @@ __author__ = 'Bartosz Kościów'
 import Queue
 import event_server
 import local_key
-import player
-import enemy
 import time
 import views.home as home_view
 import views.options as options_view
@@ -27,19 +25,14 @@ class Piader(object):
         'gui_current_tab': 'home'
     }
     views = {}
-    player = None
 
     def __init__(self, game_manager, score_manager=None):
         """init class"""
         self.game_manager = game_manager
         self.score_manager = score_manager
-        self.size = {
-            'width': self.game_manager.width,
-            'height': self.game_manager.height
-        }
-        if self.size['width'] < 6:
+        if self.game_manager.width < 6:
             raise ValueError("Width must be larger than 5")
-        if self.size['height'] < 4:
+        if self.game_manager.height < 4:
             raise ValueError("Height must be larger than 3")
         self.cfg = cfg.Configuration()
         self.queue = Queue.Queue()
@@ -48,21 +41,6 @@ class Piader(object):
         self.views['home'] = home_view.Home(self.game_manager, self)
         self.views['options'] = options_view.Options(self.game_manager, self)
         self.views['game'] = game_view.Game(self.game_manager, self)
-        self.init_game()
-
-    def init_game(self):
-        """start game"""
-        self.player = player.Player(
-            (self.size['width'] / 2) - 2,
-            self.size['height'] - 1,
-            self.size['width'],
-            self.option['objects']
-        )
-        self.option['objects'] = []
-        self.option['objects'].append(
-            enemy.Enemy(2, 0, self.size['width'], self.option['objects'])
-        )
-        self.option['objects'].append(self.player)
 
     def home_tab(self, action):
         """home tab"""
