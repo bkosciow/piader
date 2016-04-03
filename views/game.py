@@ -80,7 +80,7 @@ class Game(view.View):
                 for target in self._options['objects']:
                     if target.is_hit(source):
                         if isinstance(target, player.Player):
-                            self.player_hit(source, target)
+                            self.player_hit()
                         if isinstance(target, enemy.Enemy):
                             self.enemy_hit(source, target)
 
@@ -101,7 +101,7 @@ class Game(view.View):
             )
         )
 
-    def player_hit(self, source, target):
+    def player_hit(self):
         """player is hit"""
         self._options['lives'] -= 1
         if self._options['lives'] <= 0:

@@ -18,7 +18,11 @@ class Gameover(view.View):
         self.pane.width = lcdmanager.width
         self.pane.height = lcdmanager.height
         self.game = game
-        title = label.Label(self.pane.width / 2 - 5, self.pane.height / 2, 'title')
+        title = label.Label(
+            self.pane.width / 2 - 5,
+            self.pane.height / 2,
+            'title'
+        )
         title.label = "Game Over"
         self.pane.add_widget(title)
 
