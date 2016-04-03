@@ -13,16 +13,17 @@ import missile
 
 class Enemy(item.Item):
     """DMO - defined moving object"""
-    bombs = {
-        "current": 0,
-        "max": 1,
-        "chance": 100
-    }
+
     sprite = "<*>"
 
     def __init__(self, x, y, max_x, objects):
         """init enemy"""
         item.Item.__init__(self, x, y)
+        self.bombs = {
+            "current": 0,
+            "max": 1,
+            "chance": 100
+        }
         self.max_x = max_x
         self.objects = objects
 

@@ -12,6 +12,7 @@ import time
 import views.home as home_view
 import views.options as options_view
 import views.game as game_view
+import views.gameover as gameover_view
 import configuration as cfg
 
 
@@ -41,18 +42,7 @@ class Piader(object):
         self.views['home'] = home_view.Home(self.game_manager, self)
         self.views['options'] = options_view.Options(self.game_manager, self)
         self.views['game'] = game_view.Game(self.game_manager, self)
-
-    def home_tab(self, action):
-        """home tab"""
-        self.views['home'].loop(action)
-
-    def options_tab(self, action):
-        """options tab"""
-        self.views['options'].loop(action)
-
-    def game_tab(self, action):
-        """game tab"""
-        self.views['game'].loop(action)
+        self.views['gameover'] = gameover_view.Gameover(self.game_manager, self)
 
     def tick(self):
         """render view"""
@@ -68,13 +58,7 @@ class Piader(object):
                 start = time.time()
                 self.local_keyboard.read()
                 action = self._get_action()
-                if self.option['gui_current_tab'] == 'home':
-                    self.home_tab(action)
-                elif self.option['gui_current_tab'] == 'options':
-                    self.options_tab(action)
-                elif self.option['gui_current_tab'] == 'game':
-                    self.game_tab(action)
-
+                self.views[self.option['gui_current_tab']].loop(action)
                 self.tick()
 
                 end = time.time()
@@ -100,8 +84,7 @@ class Piader(object):
 
     def set_tab(self, tab):
         """change views"""
-        self.views['home'].hide()
-        self.views['options'].hide()
-        self.views['game'].hide()
+        for view in self.views:
+            self.views[view].hide()
         self.views[tab].show()
         self.option['gui_current_tab'] = tab

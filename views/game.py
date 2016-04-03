@@ -8,6 +8,7 @@ import abstract.view as view
 import lcdmanager.widget.canvas as canvas #pylint: disable=I0011,F0401
 import player
 import enemy
+import random
 
 
 class Game(view.View):
@@ -16,7 +17,9 @@ class Game(view.View):
 
     def __init__(self, lcdmanager, game):
         self._options = {
-            'objects': []
+            'objects': [],
+            'lives': 0,
+            'score': 0
         }
         self.manager = lcdmanager
         self.game = game
@@ -40,6 +43,7 @@ class Game(view.View):
             enemy.Enemy(2, 0, self.canvas.width, self._options['objects'])
         )
         self._options['objects'].append(self.player)
+        self._options['lives'] = self.game.cfg.lives
         self.canvas.visibility = True
 
     def loop(self, action):
@@ -56,6 +60,8 @@ class Game(view.View):
             item.tick()
             self.draw(item)
 
+        self.collision_check()
+
     def draw(self, item):
         """draw sprite on screen"""
         (position_x, position_y) = item.get_position()
@@ -66,3 +72,37 @@ class Game(view.View):
             return
 
         self.canvas.write(item.get_sprite(), position_x, position_y)
+
+    def collision_check(self):
+        """checks for collisions"""
+        for source in self._options['objects']:
+            if source.can_hit():
+                for target in self._options['objects']:
+                    if target.is_hit(source):
+                        if isinstance(target, player.Player):
+                            self.player_hit(source, target)
+                        if isinstance(target, enemy.Enemy):
+                            self.enemy_hit(source, target)
+
+
+    def enemy_hit(self, source, target):
+        """event enemy hit"""
+        self._options['score'] += 1
+        target.event_discard()
+        source.event_discard()
+        self._options['objects'].remove(source)
+        self._options['objects'].remove(target)
+        self._options['objects'].append(
+            enemy.Enemy(
+                random.randint(1, self.canvas.width - 3),
+                random.randint(0, self.canvas.height - 3),
+                self.canvas.width,
+                self._options['objects']
+            )
+        )
+
+    def player_hit(self, source, target):
+        """player is hit"""
+        self._options['lives'] -= 1
+        if self._options['lives'] <= 0:
+            self.game.set_tab('gameover')

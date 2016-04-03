@@ -30,14 +30,14 @@ class Player(item.Item):
 
     def move_right(self):
         """move player right"""
-        if self.pos_x > self.max_x - 1:
+        if self.pos_x > self.max_x - 3:
             return
         item.Item.move_right(self)
         self.heading = "right"
 
     def move_left(self):
         """move player left"""
-        if self.pos_x < 2:
+        if self.pos_x < 1:
             return
         item.Item.move_left(self)
         self.heading = "left"
