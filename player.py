@@ -13,13 +13,13 @@ import bomb
 class Player(item.Item):
     """Player class"""
     sprite = {
-        'left': "&#",
-        'right': "#&"
+        'left': "{#",
+        'right': "#}"
     }
     heading = 'left'
     missile = {
         "current": 0,
-        "max": 1
+        "max": 10
     }
 
     def __init__(self, x, y, max_x, objects):
@@ -47,13 +47,13 @@ class Player(item.Item):
         if self.missile['current'] < self.missile['max']:
             self.missile['current'] += 1
             if self.heading == "right":
-                self.objects.append(missile.Missile(self.pos_x,
-                                                    self.pos_y,
-                                                    self))
+                self.objects.append(
+                    missile.Missile(self.pos_x, self.pos_y, self)
+                )
             else:
-                self.objects.append(missile.Missile(self.pos_x + 1,
-                                                    self.pos_y,
-                                                    self))
+                self.objects.append(
+                    missile.Missile(self.pos_x + 1, self.pos_y, self)
+                )
 
     def tick(self):
         """action in tick"""

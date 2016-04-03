@@ -29,13 +29,13 @@ class Game(view.View):
 
     def show(self):
         """show game tab"""
+        self._options['objects'] = []
         self.player = player.Player(
             (self.canvas.width / 2) - 2,
             self.canvas.height - 1,
             self.canvas.width,
             self._options['objects']
         )
-        self._options['objects'] = []
         self._options['objects'].append(
             enemy.Enemy(2, 0, self.canvas.width, self._options['objects'])
         )
@@ -44,6 +44,13 @@ class Game(view.View):
 
     def loop(self, action):
         """game tick"""
+        if action == 'move.left':
+            self.player.move_left()
+        if action == 'move.right':
+            self.player.move_right()
+        if action == 'action':
+            self.player.fire()
+
         self.canvas.clear()
         for item in self._options['objects']:
             item.tick()
