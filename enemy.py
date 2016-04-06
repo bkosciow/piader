@@ -16,14 +16,17 @@ class Enemy(item.Item):
 
     sprite = "<*>"
 
-    def __init__(self, x, y, max_x, objects):
+    def __init__(self, x, y, max_x, objects, cfg):
         """init enemy"""
         item.Item.__init__(self, x, y)
+        self.cfg = cfg
         self.bombs = {
             "current": 0,
             "max": 1,
             "chance": 100
         }
+        if cfg.difficulty == 'easy':
+            self.bombs['chance'] = 30
         self.max_x = max_x
         self.objects = objects
 

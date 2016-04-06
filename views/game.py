@@ -40,7 +40,13 @@ class Game(view.View):
             self._options['objects']
         )
         self._options['objects'].append(
-            enemy.Enemy(2, 0, self.canvas.width, self._options['objects'])
+            enemy.Enemy(
+                2,
+                0,
+                self.canvas.width,
+                self._options['objects'],
+                self.game.cfg
+            )
         )
         self._options['objects'].append(self.player)
         self._options['lives'] = self.game.cfg.lives
@@ -99,7 +105,8 @@ class Game(view.View):
                 random.randint(1, self.canvas.width - 3),
                 random.randint(0, self.canvas.height - 3),
                 self.canvas.width,
-                self._options['objects']
+                self._options['objects'],
+                self.game.cfg
             )
         )
 
