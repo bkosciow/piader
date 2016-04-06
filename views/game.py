@@ -55,6 +55,8 @@ class Game(view.View):
         if action == 'action':
             self.player.fire()
 
+        self.game.cfg.scoreboard['score'] = self._options['score']
+        self.game.cfg.scoreboard['lives'] = self._options['lives']
         self.canvas.clear()
         for item in self._options['objects']:
             item.tick()

@@ -13,6 +13,7 @@ import views.home as home_view
 import views.options as options_view
 import views.game as game_view
 import views.gameover as gameover_view
+import views.scoreboard as scoreboard_view
 import configuration as cfg
 
 
@@ -43,11 +44,16 @@ class Piader(object):
         self.views['options'] = options_view.Options(self.game_manager, self)
         self.views['game'] = game_view.Game(self.game_manager, self)
         self.views['gameover'] = gameover_view.Gameover(self.game_manager, self)
+        if self.score_manager:
+            self.scoreboard_view = scoreboard_view.Scoreboard(self.score_manager, self)
 
     def tick(self):
         """render view"""
         self.game_manager.render()
         self.game_manager.flush()
+        if self.score_manager:
+            self.score_manager.render()
+            self.score_manager.flush()
 
     def main_loop(self):
         """main loop"""
@@ -59,6 +65,8 @@ class Piader(object):
                 self.local_keyboard.read()
                 action = self._get_action()
                 self.views[self.option['gui_current_tab']].loop(action)
+                if self.score_manager:
+                    self.scoreboard_view.loop(action)
                 self.tick()
 
                 end = time.time()

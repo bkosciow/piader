@@ -13,3 +13,7 @@ class Configuration(object):
         self.difficulty = 'easy'
         self.lives_dict = [1, 3, 5, 7, 10]
         self.difficulty_dict = ['easy', 'hard']
+        self.scoreboard = {
+            'score': 0,
+            'lives': 0
+        }

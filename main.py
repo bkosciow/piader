@@ -27,20 +27,19 @@ def main():
     lcd_three = buffered.CharLCD(40, 4, drv, 0, 0)
     lcd_three.init()
 
-    # vlcd_main = virtual_buffered.CharLCD(16, 6)
-    # vlcd_main.add_display(0, 0, lcd_one, 4, 0)
-    # vlcd_main.add_display(0, 4, lcd_two)
-    # vlcd_main.init()
+    vlcd_main = virtual_buffered.CharLCD(16, 4)
+    vlcd_main.add_display(0, 0, lcd_one, 4, 0)
+    vlcd_main.init()
 
     vlcd_support = virtual_buffered.CharLCD(4, 4)
     vlcd_support.add_display(0, 0, lcd_one)
     vlcd_support.init()
 
-    # game_manager = manager.Manager(lcd_three)
-    # score_manager = manager.Manager(vlcd_support)
+    game_manager = manager.Manager(vlcd_main)
+    score_manager = manager.Manager(vlcd_support)
 
-    game_manager = manager.Manager(lcd_one)
-    score_manager = manager.Manager(lcd_three)
+    # game_manager = manager.Manager(lcd_one)
+    # score_manager = manager.Manager(lcd_three)
 
     my_game = game.Piader(game_manager, score_manager)
     my_game.main_loop()
