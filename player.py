@@ -4,7 +4,6 @@
 
 """Player class"""
 
-__author__ = 'Bartosz Kościów'
 import item
 import missile
 import bomb

@@ -3,7 +3,7 @@
 #pylint: disable=I0011,R0921
 
 """Item interface"""
-__author__ = 'Bartosz Kościów'
+from builtins import object
 
 
 class Item(object):

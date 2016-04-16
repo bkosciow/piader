@@ -2,7 +2,9 @@
 
 """ options view
 """
-__author__ = 'Bartosz Kościów'
+from __future__ import division
+from builtins import str
+from past.utils import old_div
 
 import abstract.view as view
 import lcdmanager.widget.pane as pane #pylint: disable=I0011,F0401
@@ -20,11 +22,11 @@ class Options(view.View):
         self.pane.height = lcdmanager.height
         self.active_button = 0
         self.game = game
-        title = label.Label(self.pane.width / 2 - 4, 0, 'title')
+        title = label.Label(self.pane.width // 2 - 4, 0, 'title')
         title.label = "Options"
         self.pane.add_widget(title)
 
-        pos = self.pane.width / 2 - 11
+        pos = self.pane.width // 2 - 11
         if pos < 0:
             pos = 0
         button_lives = button.Button(pos + 5, 1, 'btn_lives')
@@ -47,7 +49,7 @@ class Options(view.View):
         self.label_difficulty.label = str(self.game.cfg.difficulty)
         self.pane.add_widget(self.label_difficulty)
 
-        button_back = button.Button(self.pane.width / 2 - 3, 3, 'btn_back')
+        button_back = button.Button(self.pane.width // 2 - 3, 3, 'btn_back')
         button_back.label = " Back "
         button_back.callback = self._button_back
         self.pane.add_widget(button_back)
