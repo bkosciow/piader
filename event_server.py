@@ -4,6 +4,8 @@
 
 """Game event catcher"""
 from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
 import socket
 from threading import Thread
 
@@ -26,7 +28,7 @@ class ListenerThread(Thread):
         """thread"""
         while self.work:
             try:
-                data = self.client.recv(BUFFER_SIZE)
+                data = self.client.recv(BUFFER_SIZE).decode("UTF-8")
                 if not data:
                     break
                 else:

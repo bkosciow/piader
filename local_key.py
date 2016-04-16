@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """Simple key read"""
+from builtins import object
 import socket
 import termios, fcntl, sys, os
 
@@ -48,7 +49,7 @@ class Keyboard(object):
 
     def send(self, event):
         """send event to game"""
-        self.conn_socket.send(event)
+        self.conn_socket.send(event.encode('UTF-8'))
 
     def shutdown(self):
         """restore console"""

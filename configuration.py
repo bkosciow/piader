@@ -3,6 +3,7 @@
 
 """ Piader v2 - configuration
 """
+from builtins import object
 
 
 class Configuration(object):

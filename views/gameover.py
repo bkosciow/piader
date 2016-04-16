@@ -2,6 +2,8 @@
 
 """ game over view
 """
+from __future__ import division
+from past.utils import old_div
 
 import abstract.view as view
 import lcdmanager.widget.pane as pane #pylint: disable=I0011,F0401
@@ -18,8 +20,8 @@ class Gameover(view.View):
         self.pane.height = lcdmanager.height
         self.game = game
         title = label.Label(
-            self.pane.width / 2 - 5,
-            self.pane.height / 2,
+            self.pane.width // 2 - 5,
+            self.pane.height // 2,
             'title'
         )
         title.label = "Game Over"

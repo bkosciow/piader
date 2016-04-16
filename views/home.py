@@ -2,6 +2,8 @@
 
 """ home view
 """
+from __future__ import division
+from past.utils import old_div
 
 import abstract.view as view
 import lcdmanager.widget.pane as pane #pylint: disable=I0011,F0401
@@ -19,23 +21,23 @@ class Home(view.View):
         self.pane.height = lcdmanager.height
         self.active_button = 0
         self.game = game
-        title = label.Label(self.pane.width / 2 - 5, 0, 'title')
+        title = label.Label(self.pane.width // 2 - 5, 0, 'title')
         title.label = "Piader v2.0"
         self.pane.add_widget(title)
 
-        button_start = button.Button(self.pane.width / 2 - 4, 1, 'btn_start')
+        button_start = button.Button(self.pane.width // 2 - 4, 1, 'btn_start')
         button_start.label = " Start "
         button_start.callback = self._button_start
         self.pane.add_widget(button_start)
 
         button_options = button.Button(
-            self.pane.width / 2 - 5, 2, 'btn_options'
+            self.pane.width // 2 - 5, 2, 'btn_options'
         )
         button_options.label = " Options "
         button_options.callback = self._button_options
         self.pane.add_widget(button_options)
 
-        button_quit = button.Button(self.pane.width / 2 - 3, 3, 'btn_quit')
+        button_quit = button.Button(self.pane.width // 2 - 3, 3, 'btn_quit')
         button_quit.label = " Quit "
         button_quit.callback = self._button_quit
         self.pane.add_widget(button_quit)

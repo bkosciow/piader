@@ -3,6 +3,7 @@
 #pylint: disable=I0011,R0921
 
 """Item interface"""
+from builtins import object
 
 
 class Item(object):

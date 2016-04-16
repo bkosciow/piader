@@ -3,6 +3,7 @@
 #pylint: disable=I0011,R0913,R0902,R0921
 
 """View interface"""
+from builtins import object
 
 
 class View(object):
