@@ -2,7 +2,6 @@
 
 """ game view
 """
-__author__ = 'Bartosz Kościów'
 
 import abstract.view as view
 import lcdmanager.widget.canvas as canvas #pylint: disable=I0011,F0401

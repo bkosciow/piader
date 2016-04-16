@@ -3,8 +3,7 @@
 #pylint: disable=I0011,W0231
 
 """Game event catcher"""
-__author__ = 'Bartosz Kościów'
-
+from __future__ import print_function
 import socket
 from threading import Thread
 

@@ -4,8 +4,6 @@
 
 """Bomb class"""
 
-__author__ = 'Bartosz Kościów'
-
 import item
 
 

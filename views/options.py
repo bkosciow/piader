@@ -2,7 +2,6 @@
 
 """ options view
 """
-__author__ = 'Bartosz Kościów'
 
 import abstract.view as view
 import lcdmanager.widget.pane as pane #pylint: disable=I0011,F0401

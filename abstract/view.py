@@ -4,8 +4,6 @@
 
 """View interface"""
 
-__author__ = 'Bartosz Kościów'
-
 
 class View(object):
     """Class for views"""

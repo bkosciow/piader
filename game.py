@@ -3,8 +3,6 @@
 
 """ Piader v2
 """
-__author__ = 'Bartosz Kościów'
-
 import Queue
 import event_server
 import local_key

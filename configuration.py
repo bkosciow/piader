@@ -3,7 +3,6 @@
 
 """ Piader v2 - configuration
 """
-__author__ = 'Bartosz Kościów'
 
 
 class Configuration(object):

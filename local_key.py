@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 """Simple key read"""
-__author__ = 'Bartosz Kościów'
-
 import socket
 import termios, fcntl, sys, os
 
