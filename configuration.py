@@ -3,7 +3,7 @@
 
 """ Piader v2 - configuration
 """
-__author__ = 'Bartosz Kościów'
+from builtins import object
 
 
 class Configuration(object):

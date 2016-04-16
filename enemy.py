@@ -4,7 +4,6 @@
 
 """Enemy class"""
 
-__author__ = 'Bartosz Kościów'
 import random
 import item
 import bomb

@@ -2,7 +2,8 @@
 
 """ game view
 """
-__author__ = 'Bartosz Kościów'
+from __future__ import division
+from past.utils import old_div
 
 import abstract.view as view
 import lcdmanager.widget.canvas as canvas #pylint: disable=I0011,F0401
@@ -34,7 +35,7 @@ class Game(view.View):
         """show game tab"""
         self._options['objects'] = []
         self.player = player.Player(
-            (self.canvas.width / 2) - 2,
+            (self.canvas.width // 2) - 2,
             self.canvas.height - 1,
             self.canvas.width,
             self._options['objects']

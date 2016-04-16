@@ -3,9 +3,10 @@
 
 """ Piader v2
 """
-__author__ = 'Bartosz Kościów'
-
-import Queue
+from future import standard_library
+standard_library.install_aliases()
+from builtins import object
+import queue
 import event_server
 import local_key
 import time
@@ -37,7 +38,7 @@ class Piader(object):
         if self.game_manager.height < 4:
             raise ValueError("Height must be larger than 3")
         self.cfg = cfg.Configuration()
-        self.queue = Queue.Queue()
+        self.queue = queue.Queue()
         self.event_server = event_server.EventServerThread(self.queue)
         self.local_keyboard = local_key.Keyboard()
         self.views['home'] = home_view.Home(self.game_manager, self)
@@ -81,7 +82,7 @@ class Piader(object):
         """get event and return it"""
         try:
             event = self.queue.get(True, 0.05)
-        except Queue.Empty:
+        except queue.Empty:
             event = None
 
         return event
