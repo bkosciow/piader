@@ -59,7 +59,7 @@ class EventServerThread(Thread):
     def run(self):
         """start server thread"""
         try:
-            print "Server is listening for connections..."
+            print ("Server is listening for connections...")
             while self.work:
                 try:
                     client, address = self.socket.accept()
@@ -72,7 +72,7 @@ class EventServerThread(Thread):
             self.socket.close()
         for thread in self.threads:
             thread.join()
-        print "Server down"
+        print ("Server down")
 
     def join(self, timeout=None):
         """stop server and all listeners"""
