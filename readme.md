@@ -5,8 +5,7 @@ make usage of HD44870 easier.
  In game you control small missile launcher :D that shoots at DMO (Defined Moving Object)
   An in return DMO is dropping bombs at you.
   
-  Game consist of three tabs, first is start screen where you select actions. It uses widgets from LCD Manager.
-  It also show how to refresh screen and parse events. 
+  Game shows how to refresh screen and parse events. 
   
 ## Game displays
   
@@ -56,7 +55,7 @@ You may define virtual display on any number of lcds.
  
 ## Views
  
- View is a separate file with widget description and initialization. By using pane I change active view and display what is required
+ View is a separate file with widget description and initialization. By using pane I change active view and display what is required.
  First view is main menu, second options and third game. There are also supporting views like game over and scoreboard.
   See views folder for samples how to use manger and its widgets
   
