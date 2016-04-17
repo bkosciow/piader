@@ -1,6 +1,7 @@
 ### What it is?
 
-It is a simple game that shows how to use [LCDManager](git@bitbucket.org:kosci/lcdmanager.git) and [CharLCD](https://bitbucket.org/kosci/charlcd). 
+It is a simple game that shows how to use [LCDManager](git@bitbucket.org:kosci/lcdmanager.git) **version 0.2.x** 
+and [CharLCD](https://bitbucket.org/kosci/charlcd). 
 They are libraries for Raspberry Pi that make usage of HD44870 easier.
  In game you control small missile launcher :D that shoots at DMO (Defined Moving Object)
   An in return DMO is dropping bombs at you.
