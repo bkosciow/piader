@@ -16,6 +16,7 @@ import views.game as game_view
 import views.gameover as gameover_view
 import views.scoreboard as scoreboard_view
 import configuration as cfg
+from lcdmanager import display
 
 
 class Piader(object):
@@ -40,6 +41,10 @@ class Piader(object):
         self.cfg = cfg.Configuration()
         self.queue = queue.Queue()
         self.event_server = event_server.EventServerThread(self.queue)
+        self.display = display.Display(0.5, True)
+        self.display.add(self.game_manager, 'one')
+        if self.score_manager:
+            self.display.add(self.score_manager, 'two')
         self.local_keyboard = local_key.Keyboard()
         self.views['home'] = home_view.Home(self.game_manager, self)
         self.views['options'] = options_view.Options(self.game_manager, self)
@@ -48,17 +53,10 @@ class Piader(object):
         if self.score_manager:
             self.scoreboard_view = scoreboard_view.Scoreboard(self.score_manager, self)
 
-    def tick(self):
-        """render view"""
-        self.game_manager.render()
-        self.game_manager.flush()
-        if self.score_manager:
-            self.score_manager.render()
-            self.score_manager.flush()
-
     def main_loop(self):
         """main loop"""
         self.event_server.start()
+        self.display.start()
         self.set_tab('home')
         try:
             while self.option['game_on']:
@@ -68,7 +66,6 @@ class Piader(object):
                 self.views[self.option['gui_current_tab']].loop(action)
                 if self.score_manager:
                     self.scoreboard_view.loop(action)
-                self.tick()
 
                 end = time.time()
                 if end - start < self.option['game_tick']:
@@ -77,6 +74,7 @@ class Piader(object):
         finally:
             self.local_keyboard.shutdown()
             self.event_server.join()
+            self.display.join()
 
     def _get_action(self):
         """get event and return it"""
