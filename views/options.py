@@ -72,17 +72,17 @@ class Options(view.View):
 
     def loop(self, action):
         """tick"""
-        if action == 'move.up':
+        if action == 'event.up':
             self.buttons[self.active_button].event_blur()
             self._prev_button()
             self.buttons[self.active_button].event_focus()
 
-        if action == 'move.down':
+        if action == 'event.down':
             self.buttons[self.active_button].event_blur()
             self._next_button()
             self.buttons[self.active_button].event_focus()
 
-        if action == 'action':
+        if action == 'event.action1':
             self.buttons[self.active_button].event_action()
 
     def _prev_button(self):

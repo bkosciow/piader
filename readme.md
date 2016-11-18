@@ -1,7 +1,8 @@
 ### What it is?
 
-It is a simple game that shows how to use [LCDManager](git@bitbucket.org:kosci/lcdmanager.git) **version 0.2.x** 
-and [CharLCD](https://bitbucket.org/kosci/charlcd). 
+It is a simple game that shows how to use LCDManager ([BitBucket](https://bitbucket.org/kosci/lcdmanager) 
+or [PyPi](https://pypi.python.org/pypi/LCDManager)) **version 0.2+** 
+and CharLCD ([BitBucket](https://bitbucket.org/kosci/charlcd) or [PyPi](https://pypi.python.org/pypi/CharLCD)). 
 They are libraries for Raspberry Pi that make usage of HD44870 easier.
  In game you control small missile launcher :D that shoots at DMO (Defined Moving Object)
   An in return DMO is dropping bombs at you.
@@ -73,20 +74,9 @@ You may define virtual display on any number of lcds.
             self.views[self.option['gui_current_tab']].loop(action)
             if self.score_manager:
                 self.scoreboard_view.loop(action)
-            self.tick()
 
             end = time.time()
             if end - start < self.option['game_tick']:
                 t_delta = end - start
                 time.sleep(max(0, self.option['game_tick'] - t_delta))
                 
-        def tick(self):
-            """render view"""
-            self.game_manager.render()
-            self.game_manager.flush()
-            if self.score_manager:
-                self.score_manager.render()
-                self.score_manager.flush()
-                                
-
-                                

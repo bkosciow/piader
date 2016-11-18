@@ -55,11 +55,11 @@ class Game(view.View):
 
     def loop(self, action):
         """game tick"""
-        if action == 'move.left':
+        if action == 'event.left':
             self.player.move_left()
-        if action == 'move.right':
+        if action == 'event.right':
             self.player.move_right()
-        if action == 'action':
+        if action == 'event.action1':
             self.player.fire()
 
         self.game.cfg.scoreboard['score'] = self._options['score']

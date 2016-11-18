@@ -5,25 +5,23 @@
 from builtins import object
 import socket
 import termios, fcntl, sys, os
+import json
 
-TCP_IP = '127.0.0.1'
-TCP_PORT = 5005
-BUFFER_SIZE = 1024
-
+ADDRESS = ('<broadcast>', 5053)
 
 class Keyboard(object):
     """Read keyboard"""
     def __init__(self):
         self.actions = {
-            'a': 'move.left',
-            'd': 'move.right',
-            'w': 'move.up',
-            's': 'move.down',
-            ' ': 'action',
-            'q': 'back'
+            'a': 'event.left',
+            'd': 'event.right',
+            'w': 'event.up',
+            's': 'event.down',
+            ' ': 'event.action1',
+            'q': 'event.action2'
         }
-        self.conn_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.conn_socket.connect((TCP_IP, TCP_PORT))
+        self.conn_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.conn_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         self.file_descriptior = sys.stdin.fileno()
 
         self.oldterm = termios.tcgetattr(self.file_descriptior)
@@ -49,7 +47,11 @@ class Keyboard(object):
 
     def send(self, event):
         """send event to game"""
-        self.conn_socket.send(event.encode('UTF-8'))
+        packet = {
+            "node": "local-keyboard",
+            "event": event
+        }
+        self.conn_socket.sendto(json.dumps(packet).encode('UTF-8'), ADDRESS)
 
     def shutdown(self):
         """restore console"""
