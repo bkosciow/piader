@@ -22,7 +22,7 @@ class Home(view.View):
         self.active_button = 0
         self.game = game
         title = label.Label(self.pane.width // 2 - 5, 0, 'title')
-        title.label = "Piader v2.0"
+        title.label = "Piader v2.1"
         self.pane.add_widget(title)
 
         button_start = button.Button(self.pane.width // 2 - 4, 1, 'btn_start')
@@ -60,17 +60,17 @@ class Home(view.View):
 
     def loop(self, action):
         """tick"""
-        if action == 'move.up':
+        if action == 'event.up':
             self.buttons[self.active_button].event_blur()
             self._prev_button()
             self.buttons[self.active_button].event_focus()
 
-        if action == 'move.down':
+        if action == 'event.down':
             self.buttons[self.active_button].event_blur()
             self._next_button()
             self.buttons[self.active_button].event_focus()
 
-        if action == 'action':
+        if action == 'event.action1':
             self.buttons[self.active_button].event_action()
 
     def _prev_button(self):
